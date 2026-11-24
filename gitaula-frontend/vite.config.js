@@ -8,5 +8,10 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       proxy: { '/api': env.VITE_BACKEND_URL || 'http://localhost:8080' },
     },
+    test: {
+      environment: 'jsdom',
+      setupFiles: './src/test/setup.js',
+      globals: true,
+    },
   };
 });

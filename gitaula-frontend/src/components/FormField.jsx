@@ -1,0 +1,1 @@
+export function FormField({ label, error, children, hint }) { return <label className="field"><span>{label}</span>{children}{hint && <small>{hint}</small>}{error && <small className="field-error" role="alert">{error}</small>}</label>; }

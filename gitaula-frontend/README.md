@@ -1,10 +1,12 @@
 # GitAula frontend
 
-Aplicación React con JavaScript para la integración con GitHub.
+SPA CSR de React y Vite. La sesión se mantiene exclusivamente en la cookie `HttpOnly` emitida por el backend: el cliente no guarda JWT ni identidad persistente en el navegador.
 
 ```bash
 npm install
 npm run dev
+npm test
+npm run build
 ```
 
 Abrir `http://localhost:5173`. Vite redirige `/api` al backend Dockerizado.
@@ -16,3 +18,5 @@ El callback OAuth debe ser `http://localhost:5173/auth/callback` (valor por defe
 del backend). En el contenedor deben configurarse `BACKEND_PUBLIC_URL` y
 `FRONTEND_AUTH_CALLBACK_URL` con URLs alcanzables por el navegador/GitHub; no con
 el hostname interno del servicio Docker.
+
+Las rutas de negocio requieren el contrato `/api` documentado en [CONTRATO_BACKEND_PENDIENTE.md](./CONTRATO_BACKEND_PENDIENTE.md). El frontend no usa las rutas heredadas que requieren enviar `userId` o `creatorUserId`.

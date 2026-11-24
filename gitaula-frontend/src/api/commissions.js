@@ -1,0 +1,2 @@
+import { http } from './http.js';
+export const commissionsApi = { list: () => http('/comisiones'), create: (commission) => http('/comisiones', { method: 'POST', body: commission }), get: (id) => http(`/comisiones/${id}`), participants: (id) => http(`/comisiones/${id}/participaciones`), addParticipant: (id, participant) => http(`/comisiones/${id}/participaciones`, { method: 'POST', body: participant }), updateParticipant: (id, userId, participant) => http(`/comisiones/${id}/participaciones/${userId}`, { method: 'PATCH', body: participant }) };
