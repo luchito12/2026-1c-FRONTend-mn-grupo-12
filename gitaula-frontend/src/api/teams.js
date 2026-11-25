@@ -1,2 +1,0 @@
-import { http } from './http.js';
-export const teamsApi = { get: (id) => http(`/equipos/${id}`), create: (projectId, team) => http(`/tps/${projectId}/equipos`, { method: 'POST', body: team }), join: (id) => http(`/equipos/${id}/miembros/me`, { method: 'PUT' }), leave: (id) => http(`/equipos/${id}/miembros/me`, { method: 'DELETE' }), confirm: (id) => http(`/equipos/${id}/confirmacion`, { method: 'POST' }) };

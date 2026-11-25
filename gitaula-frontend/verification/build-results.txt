@@ -1,0 +1,52 @@
+
+> gitaula-frontend@1.0.0 build
+> vite build
+
+vite v6.4.6 building for production...
+transforming...
+node_modules/zod/v4/core/util.js (400:0): A comment
+
+"// Wrapped in a `@__PURE__` IIFE: esbuild never tree-shakes a top-level initializer that contains a member access on `Number`, so the bare object literal survived into every bundle."
+
+in "node_modules/zod/v4/core/util.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+node_modules/zod/v4/core/regexes.js (74:0): A comment
+
+"/** Anchors a pattern source. The interpolation lives here rather than at the call site because
+ * esbuild will not drop a `@__PURE__` call whose own argument interpolates a variable, but it
+ * will drop `anchor(dateSource)`. Keeping it inline pinned `date` into every bundle. */"
+
+in "node_modules/zod/v4/core/regexes.js" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.
+✓ 1160 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                 0.52 kB │ gzip:   0.30 kB
+dist/assets/form-Bn6_KJUq.js                    0.18 kB │ gzip:   0.15 kB
+dist/assets/EmptyState-D5gT4Cge.js              0.36 kB │ gzip:   0.26 kB
+dist/assets/StatusBadge-BBoMzfOl.js             0.37 kB │ gzip:   0.30 kB
+dist/assets/NotFoundPage-DzAruwru.js            0.41 kB │ gzip:   0.31 kB
+dist/assets/QueryWarning-BIoXIJqW.js            0.42 kB │ gzip:   0.33 kB
+dist/assets/oauth-BbCtR3FQ.js                   0.55 kB │ gzip:   0.33 kB
+dist/assets/PageHeader-DCUHGMKh.js              0.61 kB │ gzip:   0.37 kB
+dist/assets/MutationError-BZLSZvCw.js           0.62 kB │ gzip:   0.42 kB
+dist/assets/CommissionCard-CsDD4XjO.js          0.62 kB │ gzip:   0.39 kB
+dist/assets/FormDialog-DzPGJtnA.js              0.80 kB │ gzip:   0.49 kB
+dist/assets/ProjectCreatePage-BtVpCQkP.js       0.96 kB │ gzip:   0.61 kB
+dist/assets/AuthCallbackPage-BL4vxXMA.js        1.10 kB │ gzip:   0.70 kB
+dist/assets/RepositoryStatus-Cd9Txl3Y.js        1.14 kB │ gzip:   0.67 kB
+dist/assets/domain-aHm_SPhm.js                  1.45 kB │ gzip:   0.89 kB
+dist/assets/CommissionsPage-mRiGtA7M.js         1.48 kB │ gzip:   0.85 kB
+dist/assets/LoginPage-B2tiNR8b.js               1.78 kB │ gzip:   0.97 kB
+dist/assets/CommissionCreatePage-D30cAUH5.js    2.12 kB │ gzip:   1.08 kB
+dist/assets/NotificationsPage-DbnI4Wz0.js       2.12 kB │ gzip:   1.13 kB
+dist/assets/DashboardPage-0rwbRB4P.js           2.85 kB │ gzip:   1.31 kB
+dist/assets/TeamDetailPage-4JsDoK3h.js          3.55 kB │ gzip:   1.69 kB
+dist/assets/GithubDebugPage-_SPpJPNz.js         3.91 kB │ gzip:   1.80 kB
+dist/assets/ProjectForm-CSvN03hq.js             4.98 kB │ gzip:   2.03 kB
+dist/assets/CommissionDetailPage-C0aihsjy.js    5.71 kB │ gzip:   2.39 kB
+dist/assets/DeliveryDetailPage-07CFyMFv.js      6.63 kB │ gzip:   2.85 kB
+dist/assets/ProjectDetailPage-DxjFIBp5.js      11.92 kB │ gzip:   4.48 kB
+dist/assets/index-CEBlC8if.js                  32.80 kB │ gzip:  12.04 kB
+dist/assets/forms-BYUbTC6G.js                 134.02 kB │ gzip:  40.89 kB
+dist/assets/material-Cq9gKYhd.js              360.44 kB │ gzip: 110.09 kB
+dist/assets/vendor-BFop_5LD.js                391.70 kB │ gzip: 124.87 kB
+✓ built in 5.95s

@@ -1,2 +1,22 @@
-import { Link } from 'react-router-dom'; import { StatusBadge } from '../../components/StatusBadge.jsx';
-export function CommissionCard({ commission }) { const id = commission.commissionId || commission.id; return <article className="card commission-card"><div className="card-top"><span>{commission.subjectCode || commission.subjectName || 'Materia'}</span><StatusBadge value={commission.role} /></div><h2>{commission.commissionName || commission.name}</h2><p>{commission.subjectName} · {commission.term || commission.cuatrimestre} {commission.year}</p><Link to={`/comisiones/${id}`}>Ver comisión <span aria-hidden="true">→</span></Link></article>; }
+import { Link } from 'react-router-dom';
+import { Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import { StatusBadge } from '../../shared/ui/StatusBadge.jsx';
+import { label } from '../../shared/lib/domain';
+export function CommissionCard({ commission }) {
+  return (
+    <Card variant="outlined">
+      <CardContent>
+        <Stack spacing={1} sx={{ alignItems: 'flex-start' }}>
+          <StatusBadge value={commission.role} />
+          <Typography variant="h2">{commission.subjectName}</Typography>
+          <Typography color="text.secondary">
+            {commission.commissionName} · {label(commission.term)} {commission.year}
+          </Typography>
+          <Button component={Link} to={`/comisiones/${commission.commissionId}`}>
+            Ver comisión
+          </Button>
+        </Stack>
+      </CardContent>
+    </Card>
+  );
+}

@@ -1,2 +1,0 @@
-const LABELS = { DOCENTE: 'Docente', TEACHER: 'Docente', ALUMNO: 'Alumno', STUDENT: 'Alumno', FORMING: 'Formándose', CONFIRMED: 'Confirmado', CREATED: 'Repo creado', IN_PROGRESS: 'En progreso', FINISHED: 'Entregada', SUBMITTED: 'Entregada', REVIEWING: 'En revisión', CHANGES_REQUESTED: 'Cambios solicitados', APPROVED: 'Aprobada', LATE: 'Fuera de término' };
-export function StatusBadge({ value }) { const label = LABELS[value] || value || 'Sin estado'; return <span className={`badge badge-${String(value || 'unknown').toLowerCase()}`}>{label}</span>; }

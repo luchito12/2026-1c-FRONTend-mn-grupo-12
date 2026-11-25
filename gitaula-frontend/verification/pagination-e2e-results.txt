@@ -1,0 +1,43 @@
+
+> gitaula-frontend@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:63115) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 24 tests using 4 workers
+
+(node:63130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63127) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63129) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63131) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 e2e/flows.spec.js:98:1 › evaluación: error y refetch conservan borrador; resolver cambio remoto antes de guardar (9.5s)
+  ✓   2 e2e/flows.spec.js:124:1 › alumno: acciones propias, entrega y acceso denegado sin cerrar sesión (13.8s)
+  ✓   3 e2e/flows.spec.js:14:1 › docente: alta de participante, error conservado, último docente y reactivación (16.0s)
+  ✓   5 e2e/flows.spec.js:144:1 › OAuth: recupera entrega directa, un solo canje en StrictMode y URL limpia (8.8s)
+  ✓   4 e2e/flows.spec.js:47:1 › docente: crear y editar TP, elegir integrante, confirmar equipo y reintentar repo (21.6s)
+  ✓   7 e2e/flows.spec.js:179:1 › conexión: error de /me permite reintento sin afirmar expiración (5.7s)
+  ✓   6 e2e/flows.spec.js:158:1 › logout: fallo preserva identidad; reintento y sincronización entre pestañas (10.1s)
+  ✓  11 e2e/flows.spec.js:266:1 › sesión vencida por polling: login sin carga infinita y sin datos privados tardíos (5.2s)
+  ✓   9 e2e/flows.spec.js:225:1 › notificaciones y reasignación tienen efecto visible (10.1s)
+  ✓  10 e2e/flows.spec.js:244:1 › alumno: crear equipo propio, salir y unirse a uno abierto (11.1s)
+  ✓   8 e2e/flows.spec.js:192:1 › formularios: aviso al navegar y al cerrar diálogo; foco de retorno (14.8s)
+  ✓  12 e2e/flows.spec.js:281:1 › rúbrica: validar duplicados y publicar criterios para evaluación (10.4s)
+  ✓  15 e2e/flows.spec.js:341:1 › error de /me de fondo conserva evaluación en edición y permite reintento (6.8s)
+  ✓  14 e2e/flows.spec.js:324:1 › docente: tomar revisión y aprobar sin confundir con evaluación formal (7.9s)
+  ✓  13 e2e/flows.spec.js:307:1 › comisión: alta con período anual e identidad de sesión (9.8s)
+  ✓  18 e2e/flows.spec.js:409:1 › TP individual permite ocupar un equipo abierto que quedó vacío (9.9s)
+  ✓  17 e2e/flows.spec.js:392:1 › selector de integrantes conserva docentes activos admitidos por el contrato (13.2s)
+  ✓  19 e2e/pagination.spec.js:4:1 › comisiones: página remota, búsqueda global, tamaño y navegación atrás (14.1s)
+  ✓  16 e2e/flows.spec.js:365:1 › creación incierta: reconciliar estado antes de permitir otro intento (17.2s)
+  ✓  21 e2e/pagination.spec.js:68:1 › leer la última notificación de una página vuelve a una página válida (7.2s)
+  ✓  20 e2e/pagination.spec.js:37:1 › notificaciones: busca anteriores a 100 y filtra sobre todos los resultados (11.2s)
+  ✓  22 e2e/pagination.spec.js:88:1 › paginación y búsqueda en móvil sin desbordar la página (7.2s)
+  ✓  23 e2e/visual.spec.js:20:3 › verificación visual desktop de pantallas y diálogos (27.4s)
+  ✓  24 e2e/visual.spec.js:20:3 › verificación visual mobile de pantallas y diálogos (26.8s)
+
+  24 passed (1.6m)

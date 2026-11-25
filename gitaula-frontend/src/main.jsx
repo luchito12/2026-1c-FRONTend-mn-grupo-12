@@ -1,15 +1,36 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { BrowserRouter } from 'react-router-dom';
-import App from './app/App.jsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import App from './app/router/App.jsx';
 import { queryClient } from './app/queryClient.js';
-import { AuthProvider } from './auth/AuthProvider.jsx';
-import './styles/tokens.css';
-import './styles/global.css';
-import './styles/layout.css';
-import './styles/components.css';
-
+import { AuthProvider } from './features/auth/AuthProvider';
+import { AppThemeProvider } from './theme/AppThemeProvider.jsx';
+import { FeedbackProvider } from './shared/ui/FeedbackProvider';
+import { ErrorBoundary } from './shared/ui/ErrorBoundary.jsx';
+import { UnsavedChangesProvider } from './shared/ui/UnsavedChanges.jsx';
+const router = createBrowserRouter([
+  {
+    path: '*',
+    element: (
+      <AuthProvider>
+        <UnsavedChangesProvider>
+          <App />
+        </UnsavedChangesProvider>
+      </AuthProvider>
+    ),
+  },
+]);
 createRoot(document.getElementById('root')).render(
-  <StrictMode><QueryClientProvider client={queryClient}><BrowserRouter><AuthProvider><App /></AuthProvider></BrowserRouter></QueryClientProvider></StrictMode>,
+  <StrictMode>
+    <AppThemeProvider>
+      <ErrorBoundary>
+        <QueryClientProvider client={queryClient}>
+          <FeedbackProvider>
+            <RouterProvider router={router} />
+          </FeedbackProvider>
+        </QueryClientProvider>
+      </ErrorBoundary>
+    </AppThemeProvider>
+  </StrictMode>,
 );
