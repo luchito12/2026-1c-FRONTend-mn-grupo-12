@@ -146,8 +146,14 @@ export async function installApi(context, options = {}) {
       await new Promise((r) => setTimeout(r, state.delayMutation));
     if (path === '/commissions' && method === 'GET') {
       const q = (url.searchParams.get('q') ?? '').toLowerCase();
-      const items = (state.commissions ?? [state.commission])
-        .filter((c) => `${c.subjectName} ${c.commissionName} ${c.year}`.toLowerCase().includes(q))
+      const role = url.searchParams.get('role');
+      const all = state.commissions ?? [state.commission];
+      const items = all
+        .filter(
+          (c) =>
+            (!role || c.role === role) &&
+            `${c.subjectName} ${c.commissionName} ${c.year}`.toLowerCase().includes(q),
+        )
         .sort(
           (a, b) =>
             b.year - a.year ||
@@ -155,7 +161,7 @@ export async function installApi(context, options = {}) {
             a.commissionName.localeCompare(b.commissionName) ||
             a.commissionId - b.commissionId,
         );
-      return reply(pageOf(items, url));
+      return reply({ ...pageOf(items, url), availableRoles: [...new Set(all.map((c) => c.role))] });
     }
     if (path === '/commissions' && method === 'POST') {
       state.commission = { ...state.commission, ...body };
@@ -286,18 +292,27 @@ export async function installApi(context, options = {}) {
       };
       return reply(state.delivery.evaluation);
     }
-    if (path === '/api/dashboard')
+    if (path === '/api/dashboard') {
+      const role = url.searchParams.get('role');
       return reply({
-        projects: [
-          {
-            ...state.project,
-            commissionName: state.commission.commissionName,
-            role: state.role === 'TEACHER' ? 'DOCENTE' : 'ALUMNO',
-          },
-        ],
-        deliveries: [{ ...state.delivery, status: 'EN_REVISION', teamName: forming.teamName }],
+        projects: (
+          state.dashboardProjects ?? [
+            { ...state.project, commissionName: state.commission.commissionName, role: state.role },
+          ]
+        ).filter((p) => !role || p.role === role),
+        deliveries: (
+          state.dashboardDeliveries ?? [
+            {
+              ...state.delivery,
+              status: 'EN_REVISION',
+              teamName: forming.teamName,
+              role: state.role,
+            },
+          ]
+        ).filter((d) => !role || d.role === role),
         unreadNotificationCount: state.notifications.filter((n) => !n.isRead).length,
       });
+    }
     if (path === '/api/notifications') {
       const q = (url.searchParams.get('q') ?? '').toLowerCase();
       const status = url.searchParams.get('status') ?? 'ALL';

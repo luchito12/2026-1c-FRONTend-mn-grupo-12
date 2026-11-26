@@ -6,13 +6,14 @@ import {
   participantSchema,
   parseContract,
   parseId,
+  roleSchema,
 } from '../../shared/api/contracts';
 export const commissionsApi = {
-  list: async (userId, { page = 0, size = 10, q = '' } = {}, options) =>
+  list: async (userId, { page = 0, size = 10, q = '', role } = {}, options) =>
     parseContract(
-      pageSchema(commissionSchema),
+      pageSchema(commissionSchema).extend({ availableRoles: z.array(roleSchema) }),
       await businessHttp(
-        `/commissions?${new URLSearchParams({ userId: String(parseId(userId)), page: String(page), size: String(size), q })}`,
+        `/commissions?${new URLSearchParams({ userId: String(parseId(userId)), page: String(page), size: String(size), q, ...(role ? { role } : {}) })}`,
         options,
       ),
     ),

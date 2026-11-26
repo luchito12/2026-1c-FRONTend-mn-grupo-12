@@ -48,6 +48,13 @@ con acceso al listado completo. La migración backend V7 añade índices para la
 consultas paginadas; las respuestas de las dos listas cambiaron a un objeto con
 contenido y totales, por lo que ambos proyectos deben actualizarse juntos.
 
+La cabecera permite elegir vista Docente o Alumno. Inicio y Mis comisiones
+consultan datos filtrados por ese rol en el servidor; la selección se mantiene
+al navegar. Al cargar se elige Docente si tiene comisiones docentes activas y
+Alumno en los demás casos. El selector no cambia los permisos por comisión.
+Las notificaciones son generales de la cuenta. El código está en
+`src/features/work-view/`.
+
 El servidor decide permisos. El cliente consume `currentRole`, `allowedActions`
 y los flags del equipo, y restringe visualmente las acciones. Un 403 muestra
 acceso denegado sin cerrar sesión. Una falla de red conserva la identidad y el

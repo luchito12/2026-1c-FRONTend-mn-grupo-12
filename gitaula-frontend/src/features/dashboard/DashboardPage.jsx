@@ -1,3 +1,4 @@
+import { useWorkView } from '../work-view/WorkViewProvider';
 import { Link } from 'react-router-dom';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { useCommissions } from '../commissions/hooks.js';
@@ -10,12 +11,26 @@ import { PageHeader } from '../../shared/ui/PageHeader.jsx';
 import { AcademicDashboard } from './AcademicDashboard.jsx';
 export function DashboardPage() {
   const user = useCurrentUser();
-  const commissions = useCommissions({ page: 0, size: 6 });
+  const view = useWorkView();
+  const isTeacher = view.role === 'TEACHER';
+  const commissions = useCommissions({ page: 0, size: 6, role: view.role });
   return (
     <Stack spacing={3}>
       <PageHeader eyebrow="INICIO" title={`Hola, ${user?.githubLogin}`}>
-        Tus próximos pasos en la cursada.
+        {isTeacher
+          ? 'Vista docente · Organizá tus comisiones y revisá las entregas.'
+          : 'Vista alumno · Seguí tus trabajos prácticos, equipos y entregas.'}
       </PageHeader>
+      {isTeacher && (
+        <Button
+          variant="contained"
+          component={Link}
+          to="/comisiones/nueva"
+          sx={{ alignSelf: 'flex-start' }}
+        >
+          Crear comisión
+        </Button>
+      )}
       <AcademicDashboard />
       <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
         <Typography variant="h2">Mis comisiones</Typography>
@@ -41,14 +56,18 @@ export function DashboardPage() {
         </Box>
       ) : (
         <EmptyState
-          title="Todavía no participás en una comisión"
+          title={`Todavía no tenés comisiones como ${isTeacher ? 'docente' : 'alumno'}`}
           action={
-            <Button component={Link} to="/comisiones/nueva">
-              Crear comisión
-            </Button>
+            isTeacher && (
+              <Button component={Link} to="/comisiones/nueva">
+                Crear comisión
+              </Button>
+            )
           }
         >
-          Cuando te agreguen, aparecerá acá con tu rol.
+          {isTeacher
+            ? 'Creá una comisión para empezar.'
+            : 'Cuando un docente te incorpore, aparecerá acá. Podés cambiar de vista desde la cabecera.'}
         </EmptyState>
       )}
     </Stack>

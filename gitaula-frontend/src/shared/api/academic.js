@@ -25,13 +25,18 @@ const dashboardSchema = z.object({
       status: statusSchema,
       projectTitle: z.string(),
       teamName: z.string(),
+      role: roleSchema,
       dueDate: z.string().nullable(),
     }),
   ),
   unreadNotificationCount: z.number().int().nonnegative(),
 });
 export const academicApi = {
-  dashboard: async (options) => parseContract(dashboardSchema, await http('/dashboard', options)),
+  dashboard: async (role, options) =>
+    parseContract(
+      dashboardSchema,
+      await http(`/dashboard${role ? `?${new URLSearchParams({ role })}` : ''}`, options),
+    ),
   notifications: async ({ page = 0, size = 10, q = '', status = 'ALL' } = {}, options) =>
     parseContract(
       pageSchema(notificationSchema),

@@ -654,3 +654,32 @@ pendiente únicamente la validación autenticada con GitHub real descrita arriba
 
 - Cierre de la revisión: backend Docker arrancó y validó las siete migraciones;
   `npm run test:live` aprobó 1 prueba contra ese contenedor actualizado.
+
+
+#### 2026-11-25 — Selector de vista Docente/Alumno implementado
+
+- Selector en cabecera para escritorio y móvil. Cambia Inicio y Mis comisiones,
+  incluidos TPs, entregas, textos y acciones principales. Al cambiar desde un
+  detalle vuelve a Inicio; desde comisiones conserva búsqueda/tamaño y reinicia
+  la página. Las vistas sin participaciones muestran una próxima acción clara.
+- La elección vive en memoria para la identidad autenticada y se conserva al
+  navegar. Al cargar se usa Docente si hay participaciones docentes activas y
+  Alumno en los demás casos. Ambas vistas son seleccionables; la preferencia no
+  concede permisos. Crear una comisión lleva a la vista Docente para verla.
+- El backend filtra comisiones y dashboard por `role=TEACHER|STUDENT`. La respuesta
+  paginada de comisiones agrega `availableRoles`, calculado sobre todas las
+  participaciones activas, sin depender de búsqueda/página. Las entregas del
+  dashboard incluyen `role` y mantienen la restricción a equipos propios del
+  alumno. Notificaciones sigue mostrando la actividad general de la cuenta.
+- Queries separadas por rol. Un enlace directo utiliza la autorización real de
+  la comisión y muestra un aviso si el rol no coincide con la vista elegida.
+- El cambio de vista pide descartar borradores sólo cuando corresponde, conserva
+  los valores al cancelar y evita una segunda confirmación al continuar.
+- Verificaciones aprobadas: 48 tests frontend, 29 tests de navegador, 6 pruebas
+  backend con MySQL real y GitHub simulado; lint, typecheck, formato y build.
+  Incluye roles mixtos, filtro antes de paginar, totales, rol de una URL directa,
+  borradores y anchos de 320/390 px. Se actualizaron capturas y pendientes.
+
+- Cierre: backend Docker reconstruido y arrancado; comprobación real anónima
+  aprobada (1 test). Frontend de desarrollo disponible en `http://localhost:5173`.
+  Selector marcado como implementado en `PENDIENTES_FUNCIONALES_GITAULA.md`.

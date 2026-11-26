@@ -1,3 +1,4 @@
+import { WorkViewSelector } from '../../features/work-view/WorkViewSelector.jsx';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
@@ -48,13 +49,23 @@ export function Header({ onOpenNavigation }) {
           component={Link}
           to="/"
           variant="h2"
-          sx={{ textDecoration: 'none', color: 'primary.main' }}
+          sx={{
+            fontSize: { xs: '1.1rem', sm: '1.25rem' },
+            textDecoration: 'none',
+            color: 'primary.main',
+          }}
         >
           GitAula
         </Typography>
         <Box sx={{ flex: 1 }} />
+        <WorkViewSelector />
         <Tooltip title="Notificaciones">
-          <IconButton component={Link} to="/notificaciones" aria-label="Notificaciones">
+          <IconButton
+            component={Link}
+            to="/notificaciones"
+            aria-label="Notificaciones"
+            sx={{ '@media (max-width:359.95px)': { display: 'none' } }}
+          >
             <NotificationsOutlinedIcon />
           </IconButton>
         </Tooltip>

@@ -3,8 +3,8 @@ import { commissionsApi } from './api.js';
 import { keys, invalidations } from '../../shared/api/queryKeys';
 import { useDomainMutation } from '../../shared/api/useDomainMutation';
 import { useCurrentUser } from '../auth/useCurrentUser.js';
-export function useCommissions({ page = 0, size = 10, q = '' } = {}) {
-  const filters = { page, size, q };
+export function useCommissions({ page = 0, size = 10, q = '', role } = {}) {
+  const filters = { page, size, q, role };
   const user = useCurrentUser();
   return useQuery({
     queryKey: keys.commissions(user?.userId, filters),

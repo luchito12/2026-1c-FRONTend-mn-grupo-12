@@ -1,10 +1,12 @@
-import { Breadcrumbs, Link as MuiLink, Typography } from '@mui/material';
+import { useWorkView } from '../../features/work-view/WorkViewProvider';
+import { Alert, Breadcrumbs, Link as MuiLink, Typography } from '@mui/material';
 import { Link, useMatch } from 'react-router-dom';
 import { useProject } from '../../features/projects/hooks.js';
 import { useCommission } from '../../features/commissions/hooks.js';
 import { useTeam } from '../../features/teams/hooks.js';
 import { useDelivery } from '../../features/deliveries/hooks.js';
 export function ResourceBreadcrumbs() {
+  const view = useWorkView();
   const commissionMatch = useMatch('/comisiones/:commissionId/*');
   const projectMatch = useMatch('/tps/:projectId');
   const teamMatch = useMatch('/equipos/:teamId');
@@ -31,18 +33,28 @@ export function ResourceBreadcrumbs() {
   if (deliveryMatch) items.push({ name: 'Entrega' });
   if (!commissionMatch && !projectMatch && !teamMatch && !deliveryMatch) return null;
   return (
-    <Breadcrumbs aria-label="Ubicación" sx={{ mb: 2 }}>
-      {items.map((item, index) =>
-        index === items.length - 1 ? (
-          <Typography key={item.name} variant="body2">
-            {item.name}
-          </Typography>
-        ) : (
-          <MuiLink component={Link} key={item.to} to={item.to} underline="hover" variant="body2">
-            {item.name}
-          </MuiLink>
-        ),
+    <>
+      {' '}
+      <Breadcrumbs aria-label="Ubicación" sx={{ mb: 2 }}>
+        {items.map((item, index) =>
+          index === items.length - 1 ? (
+            <Typography key={item.name} variant="body2">
+              {item.name}
+            </Typography>
+          ) : (
+            <MuiLink component={Link} key={item.to} to={item.to} underline="hover" variant="body2">
+              {item.name}
+            </MuiLink>
+          ),
+        )}
+      </Breadcrumbs>
+      {commission.data && view && commission.data.role !== view.role && (
+        <Alert severity="info" sx={{ mb: 2 }}>
+          En esta comisión participás como{' '}
+          {commission.data.role === 'TEACHER' ? 'docente' : 'alumno'}. Las acciones disponibles
+          corresponden a ese rol.
+        </Alert>
       )}
-    </Breadcrumbs>
+    </>
   );
 }

@@ -72,3 +72,16 @@ actualizan actividad/estados y sólo son consultables para repos autorizados.
   todas las notificaciones nuevas; ya no descarga un resumen limitado a 100.
 - La migración V7 agrega índices por usuario/fecha y usuario/lectura/fecha.
   FE y BE deben actualizarse juntos por el cambio del formato de las listas.
+
+
+## Selector de vista Docente/Alumno
+
+- `GET /commissions` admite `role=TEACHER|STUDENT` opcional. El filtro se aplica
+  antes de contar y paginar. La respuesta agrega `availableRoles`, con los roles
+  de todas las participaciones activas del usuario, independientes de `q` y página.
+- `GET /api/dashboard` admite el mismo filtro opcional y cada entrega incluye
+  `role`. Mantiene los controles de visibilidad de equipos propios para alumnos.
+- La vista es una preferencia de interfaz por identidad, sin rol global ni cambios
+  en la autorización de los recursos. Al abrir una URL directa manda el rol real.
+- El frontend y backend deben actualizarse juntos por el resumen de roles y el
+  campo agregado al dashboard.

@@ -2,8 +2,10 @@ type Id = string | number | undefined;
 const resource = (name: string, id: Id) => [name, String(id)] as const;
 export const keys = {
   session: ['session'] as const,
-  commissions: (id: Id, filters: { page: number; size: number; q: string }) =>
-    ['commissions', id, filters] as const,
+  commissions: (
+    id: Id,
+    filters: { page: number; size: number; q: string; role?: 'TEACHER' | 'STUDENT' },
+  ) => ['commissions', id, filters] as const,
   commission: (id: Id) => resource('commission', id),
   participants: (id: Id) => resource('participants', id),
   projects: (id: Id) => resource('projects', id),
@@ -11,7 +13,7 @@ export const keys = {
   team: (id: Id) => resource('team', id),
   delivery: (id: Id) => resource('delivery', id),
   rubric: (id: Id) => resource('rubric', id),
-  dashboard: ['dashboard'] as const,
+  dashboard: (role?: 'TEACHER' | 'STUDENT') => ['dashboard', role] as const,
   notifications: (filters: { page: number; size: number; q: string; status: string }) =>
     ['notifications', filters] as const,
   events: ['github-events'] as const,

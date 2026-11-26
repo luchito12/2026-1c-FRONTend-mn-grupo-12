@@ -1,3 +1,4 @@
+import { useWorkView } from '../work-view/WorkViewProvider';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { Button, List, ListItem, ListItemText, Paper, Stack, Typography } from '@mui/material';
@@ -8,9 +9,11 @@ import { StatusBadge } from '../../shared/ui/StatusBadge.jsx';
 import { LoadingState } from '../../shared/ui/LoadingState.jsx';
 import { ErrorState } from '../../shared/ui/ErrorState.jsx';
 export function AcademicDashboard() {
+  const { role } = useWorkView();
+  const isTeacher = role === 'TEACHER';
   const overview = useQuery({
-    queryKey: keys.dashboard,
-    queryFn: ({ signal }) => academicApi.dashboard({ signal }),
+    queryKey: keys.dashboard(role),
+    queryFn: ({ signal }) => academicApi.dashboard(role, { signal }),
     refetchInterval: 30_000,
     refetchIntervalInBackground: false,
   });
@@ -21,7 +24,11 @@ export function AcademicDashboard() {
   return (
     <Stack spacing={3}>
       <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
-        <Typography variant="h2">Trabajos prácticos y vencimientos</Typography>
+        <Typography variant="h2">
+          {isTeacher
+            ? 'Trabajos prácticos de tus comisiones'
+            : 'Mis trabajos prácticos y vencimientos'}
+        </Typography>
         <Button component={Link} to="/notificaciones">
           {data.unreadNotificationCount} avisos nuevos
         </Button>
@@ -53,7 +60,10 @@ export function AcademicDashboard() {
           )}
         </List>
       </Paper>
-      <Typography variant="h2">Entregas que requieren seguimiento ({pending.length})</Typography>
+      <Typography variant="h2">
+        {isTeacher ? 'Entregas para seguimiento docente' : 'Mis entregas pendientes'} (
+        {pending.length})
+      </Typography>
       <Paper variant="outlined">
         <List>
           {pending.length ? (

@@ -1,3 +1,4 @@
+import { useWorkView } from '../work-view/WorkViewProvider';
 import { useMarkChangesSaved } from '../../shared/ui/UnsavedChanges.jsx';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -19,6 +20,7 @@ const schema = z.object({
 });
 export function CommissionCreatePage() {
   const navigate = useNavigate();
+  const view = useWorkView();
   const markSaved = useMarkChangesSaved();
   const user = useCurrentUser();
   const form = useForm({
@@ -33,6 +35,7 @@ export function CommissionCreatePage() {
   });
   const create = useCreateCommission(() => {
     markSaved();
+    view?.setRole('TEACHER');
     form.reset(form.getValues());
     navigate('/comisiones');
   });

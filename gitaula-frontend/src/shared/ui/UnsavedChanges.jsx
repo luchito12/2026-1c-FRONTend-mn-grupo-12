@@ -26,8 +26,8 @@ export function UnsavedChangesProvider({ children }) {
     if (dirty) entries.current.add(id);
     else entries.current.delete(id);
   }, []);
-  const beforeAction = useCallback((action) => {
-    if (entries.current.size) setPendingAction(() => action);
+  const beforeAction = useCallback((action, { discardOnConfirm = false } = {}) => {
+    if (entries.current.size) setPendingAction({ run: action, discardOnConfirm });
     else action();
   }, []);
   const shouldBlock = useCallback(
@@ -56,7 +56,8 @@ export function UnsavedChangesProvider({ children }) {
     if (pendingAction) {
       const action = pendingAction;
       setPendingAction(null);
-      action();
+      if (action.discardOnConfirm) entries.current.clear();
+      action.run();
     } else {
       entries.current.clear();
       blocker.proceed?.();

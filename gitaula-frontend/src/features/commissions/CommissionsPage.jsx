@@ -1,3 +1,4 @@
+import { useWorkView } from '../work-view/WorkViewProvider';
 import { Link } from 'react-router-dom';
 import { Box, Button, Stack, LinearProgress } from '@mui/material';
 import { useCommissions } from './hooks.js';
@@ -12,7 +13,9 @@ import { QueryWarning } from '../../shared/ui/QueryWarning.jsx';
 import { usePagedSearch, useValidPage } from '../../shared/lib/usePagedSearch.js';
 export function CommissionsPage() {
   const search = usePagedSearch();
-  const commissions = useCommissions(search);
+  const view = useWorkView();
+  const isTeacher = view.role === 'TEACHER';
+  const commissions = useCommissions({ ...search, role: view.role });
   useValidPage(commissions.data, search.page, search.setPage);
   const result = commissions.data;
   return (
@@ -21,12 +24,16 @@ export function CommissionsPage() {
         eyebrow="COMISIONES"
         title="Mis comisiones"
         actions={
-          <Button variant="contained" component={Link} to="/comisiones/nueva">
-            Crear comisión
-          </Button>
+          isTeacher && (
+            <Button variant="contained" component={Link} to="/comisiones/nueva">
+              Crear comisión
+            </Button>
+          )
         }
       >
-        Tu rol puede ser diferente en cada comisión.
+        {isTeacher
+          ? 'Comisiones en las que participás como docente.'
+          : 'Comisiones en las que participás como alumno.'}
       </PageHeader>
       <SearchForm
         query={search.q}
@@ -53,9 +60,14 @@ export function CommissionsPage() {
         </Box>
       ) : (
         <EmptyState
-          title={search.q ? 'No hay coincidencias' : 'No hay comisiones activas'}
+          title={
+            search.q
+              ? 'No hay coincidencias'
+              : `Todavía no tenés comisiones como ${isTeacher ? 'docente' : 'alumno'}`
+          }
           action={
-            !search.q && (
+            !search.q &&
+            isTeacher && (
               <Button component={Link} to="/comisiones/nueva">
                 Crear comisión
               </Button>
@@ -64,7 +76,9 @@ export function CommissionsPage() {
         >
           {search.q
             ? 'Probá con otro nombre o año.'
-            : 'Creá una comisión o pedile a un docente que te incorpore.'}
+            : isTeacher
+              ? 'Creá una comisión para organizar tu cursada.'
+              : 'Pedile a un docente que te incorpore a su comisión. Podés cambiar de vista desde la cabecera.'}
         </EmptyState>
       )}
       {result && (

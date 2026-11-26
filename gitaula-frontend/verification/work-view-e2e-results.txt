@@ -1,0 +1,48 @@
+
+> gitaula-frontend@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:66933) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 29 tests using 4 workers
+
+(node:66945) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66947) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66949) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:66948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 e2e/flows.spec.js:98:1 › evaluación: error y refetch conservan borrador; resolver cambio remoto antes de guardar (8.5s)
+  ✓   1 e2e/flows.spec.js:124:1 › alumno: acciones propias, entrega y acceso denegado sin cerrar sesión (11.3s)
+  ✓   2 e2e/flows.spec.js:14:1 › docente: alta de participante, error conservado, último docente y reactivación (13.5s)
+  ✓   5 e2e/flows.spec.js:144:1 › OAuth: recupera entrega directa, un solo canje en StrictMode y URL limpia (7.5s)
+  ✓   3 e2e/flows.spec.js:47:1 › docente: crear y editar TP, elegir integrante, confirmar equipo y reintentar repo (20.4s)
+  ✓   7 e2e/flows.spec.js:179:1 › conexión: error de /me permite reintento sin afirmar expiración (6.9s)
+  ✓   6 e2e/flows.spec.js:158:1 › logout: fallo preserva identidad; reintento y sincronización entre pestañas (11.2s)
+  ✓  11 e2e/flows.spec.js:266:1 › sesión vencida por polling: login sin carga infinita y sin datos privados tardíos (4.8s)
+  ✓  10 e2e/flows.spec.js:225:1 › notificaciones y reasignación tienen efecto visible (9.3s)
+  ✓   8 e2e/flows.spec.js:192:1 › formularios: aviso al navegar y al cerrar diálogo; foco de retorno (13.9s)
+  ✓   9 e2e/flows.spec.js:244:1 › alumno: crear equipo propio, salir y unirse a uno abierto (10.6s)
+  ✓  14 e2e/flows.spec.js:324:1 › docente: tomar revisión y aprobar sin confundir con evaluación formal (5.1s)
+  ✓  15 e2e/flows.spec.js:341:1 › error de /me de fondo conserva evaluación en edición y permite reintento (4.6s)
+  ✓  12 e2e/flows.spec.js:281:1 › rúbrica: validar duplicados y publicar criterios para evaluación (8.5s)
+  ✓  13 e2e/flows.spec.js:307:1 › comisión: alta con período anual e identidad de sesión (6.3s)
+  ✓  18 e2e/flows.spec.js:409:1 › TP individual permite ocupar un equipo abierto que quedó vacío (4.0s)
+  ✓  17 e2e/flows.spec.js:392:1 › selector de integrantes conserva docentes activos admitidos por el contrato (6.2s)
+  ✓  19 e2e/pagination.spec.js:4:1 › comisiones: página remota, búsqueda global, tamaño y navegación atrás (6.3s)
+  ✓  16 e2e/flows.spec.js:365:1 › creación incierta: reconciliar estado antes de permitir otro intento (9.5s)
+  ✓  20 e2e/pagination.spec.js:37:1 › notificaciones: busca anteriores a 100 y filtra sobre todos los resultados (7.3s)
+  ✓  21 e2e/pagination.spec.js:68:1 › leer la última notificación de una página vuelve a una página válida (5.8s)
+  ✓  22 e2e/pagination.spec.js:88:1 › paginación y búsqueda en móvil sin desbordar la página (6.8s)
+  ✓  25 e2e/work-view.spec.js:60:1 › selector filtra Inicio, comisiones y totales en servidor; conserva elección al navegar (8.4s)
+  ✓  26 e2e/work-view.spec.js:88:1 › alumno inicia en su vista y puede elegir una vista docente vacía sin obtener permisos (7.4s)
+  ✓  28 e2e/work-view.spec.js:131:1 › vista seleccionada no altera el rol de una comisión abierta por enlace directo (9.0s)
+  ✓  27 e2e/work-view.spec.js:109:1 › cambiar de vista respeta borradores y solicita un solo descarte (9.4s)
+  ✓  29 e2e/work-view.spec.js:149:1 › selector accesible por teclado y cabecera sin desbordes en móvil (13.4s)
+  ✓  23 e2e/visual.spec.js:20:3 › verificación visual desktop de pantallas y diálogos (41.4s)
+  ✓  24 e2e/visual.spec.js:20:3 › verificación visual mobile de pantallas y diálogos (40.5s)
+
+  29 passed (1.6m)
